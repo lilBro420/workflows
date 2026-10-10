@@ -2,7 +2,7 @@ name: Generate a build and push to another branch
 on:
   push:
     branches:
-      - main # The branch name your are commit the new changes
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,14 +13,14 @@ jobs:
       - name: Install all dependencies
         run: npm install
       - name: Build
-        run: npm run build # The build command of your project
+        run: npm run build
       - name: Create branch if it doesn't exist
         run: git checkout -b build
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: build # The branch name where you want to push the assets
-          FOLDER: dist # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this
-          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+          BRANCH: build
+          FOLDER: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}"
